@@ -1,8 +1,9 @@
 module g2.messagerieserver {
-    requires javafx.controls;
-    requires javafx.fxml;
+    requires lombok;
+    requires jakarta.persistence;
+    requires org.hibernate.orm.core;
+    requires java.naming;
+    requires java.sql;
+    requires static jbcrypt;
 
-
-    opens g2.messagerieserver to javafx.fxml;
-    exports g2.messagerieserver;
 }
