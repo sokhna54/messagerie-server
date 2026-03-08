@@ -43,9 +43,8 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.32</version>
-            <scope>provided</scope>
+            <scope>compile</scope>
         </dependency>
-
         <!-- BCrypt pour le hachage des mots de passe (RG9) -->
         <dependency>
             <groupId>org.mindrot</groupId>
