@@ -1,13 +1,12 @@
 package g2.messagerieclient.controller;
 
-import g2.messagerieclient.model.Packet;
 import g2.messagerieclient.network.ServerConnection;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
+import g2.messagerieserver.model.Packet;
 public class LoginController {
 
     @FXML private TextField usernameField;

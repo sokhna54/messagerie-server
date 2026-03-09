@@ -1,6 +1,5 @@
 package g2.messagerieclient.controller;
-
-import g2.messagerieclient.model.Packet;
+import g2.messagerieserver.model.Packet;
 import g2.messagerieclient.network.ServerConnection;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;

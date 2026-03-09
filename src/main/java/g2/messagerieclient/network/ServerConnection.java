@@ -1,6 +1,6 @@
 package g2.messagerieclient.network;
 
-import g2.messagerieclient.model.Packet;
+import g2.messagerieserver.model.Packet;
 
 import java.io.*;
 import java.net.Socket;
