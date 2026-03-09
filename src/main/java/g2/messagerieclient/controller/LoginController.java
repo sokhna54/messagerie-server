@@ -12,6 +12,8 @@ public class LoginController {
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
+    @FXML private TextField usernameFieldReg;
+    @FXML private PasswordField passwordFieldReg;
     @FXML private ComboBox<String> roleComboBox;
     @FXML private Label messageLabel;
     @FXML private TabPane tabPane;
@@ -52,8 +54,8 @@ public class LoginController {
 
     @FXML
     public void handleRegister() {
-        String username = usernameField.getText().trim();
-        String password = passwordField.getText().trim();
+        String username = usernameFieldReg.getText().trim();
+        String password = passwordFieldReg.getText().trim();
         String role = roleComboBox.getValue();
 
         if (username.isEmpty() || password.isEmpty()) {

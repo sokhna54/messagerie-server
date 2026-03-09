@@ -18,7 +18,6 @@ public class ServerConnection {
 
     public interface PacketListener {
         void onPacketReceived(Packet packet);
-        void onConnectionLost();
     }
 
     public void connect(PacketListener listener) throws IOException {
@@ -38,7 +37,7 @@ public class ServerConnection {
                     javafx.application.Platform.runLater(() -> listener.onPacketReceived(p));
                 }
             } catch (IOException | ClassNotFoundException e) {
-                javafx.application.Platform.runLater(() -> listener.onConnectionLost());
+                System.err.println("Connexion perdue : " + e.getMessage());
             }
         });
         listenerThread.setDaemon(true);

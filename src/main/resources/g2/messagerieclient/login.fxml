@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
       fx:controller="g2.messagerieclient.controller.LoginController"
@@ -30,8 +29,8 @@
         <!-- ONGLET INSCRIPTION -->
         <Tab text="Inscription">
             <VBox spacing="12" style="-fx-padding: 20;">
-                <TextField fx:id="usernameField" promptText="Nom d'utilisateur"/>
-                <PasswordField fx:id="passwordField" promptText="Mot de passe"/>
+                <TextField fx:id="usernameFieldReg" promptText="Nom d'utilisateur"/>
+                <PasswordField fx:id="passwordFieldReg" promptText="Mot de passe"/>
                 <ComboBox fx:id="roleComboBox" maxWidth="Infinity"/>
                 <Button text="S'inscrire" styleClass="btn-register"
                         onAction="#handleRegister" maxWidth="Infinity"/>

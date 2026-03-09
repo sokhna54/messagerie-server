@@ -30,10 +30,15 @@ public class ChatController {
         this.currentRole = role;
         this.connection = connection;
         currentUserLabel.setText("🟢 " + username + " (" + role + ")");
-        connection.connect(this::handlePacket);
+
+        try {
+            connection.connect(this::handlePacket);
+        } catch (Exception e) {
+            System.err.println("Erreur connexion : " + e.getMessage());
+        }
+
         loadUsers();
     }
-
     private void loadUsers() {
         try {
             connection.send(Packet.getUsers(currentUsername));
