@@ -21,6 +21,7 @@ public class Server {
     private final ExecutorService threadPool = Executors.newCachedThreadPool();
 
     public void start() {
+        HibernateUtil.getSessionFactory();
         log("Base de données connectée.");
         log("Serveur G2 démarré sur le port " + PORT);
         log("En attente de connexions...");

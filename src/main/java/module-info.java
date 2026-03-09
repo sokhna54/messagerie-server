@@ -8,7 +8,8 @@ module g2.messagerieserver {
     requires jbcrypt;
     requires static lombok;
 
+    opens g2.messagerieserver.model to org.hibernate.orm.core;
+    opens g2.messagerieclient.controller to javafx.fxml;
     exports g2.messagerieclient to javafx.graphics;
     opens g2.messagerieclient to javafx.fxml;
-    opens g2.messagerieclient.controller to javafx.fxml;
 }
