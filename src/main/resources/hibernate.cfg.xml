@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- =====================================================
+             CONFIGURATION BASE DE DONNÉES
+             Modifier les paramètres selon votre environnement
+             ===================================================== -->
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/g2_messagerie</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">passer</property>
+
+        <!-- Dialecte PostgreSQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Pool de connexions -->
+        <property name="hibernate.c3p0.min_size">5</property>
+        <property name="hibernate.c3p0.max_size">20</property>
+        <property name="hibernate.c3p0.timeout">300</property>
+
+        <!-- Création automatique des tables au démarrage du serveur -->
+        <!-- "update" = crée les tables si elles n'existent pas, les met à jour sinon -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- PostgreSQL : générateur de séquences natif -->
+        <property name="hibernate.id.new_generator_mappings">true</property>
+
+        <!-- Affichage des requêtes SQL (désactiver en production) -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Entités mappées -->
+        <mapping class="g2.messagerieserver.model.User"/>
+        <mapping class="g2.messagerieserver.model.Message"/>
+    </session-factory>
+</hibernate-configuration>
