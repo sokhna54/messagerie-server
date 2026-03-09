@@ -6,28 +6,28 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
-
-    private static SessionFactory sessionFactory;
+    private static final SessionFactory SESSION_FACTORY;
 
     static {
         try {
-            sessionFactory = new Configuration()
+            SESSION_FACTORY = new Configuration()
                     .configure("hibernate.cfg.xml")
-                    .addAnnotatedClass(User.class)
-                    .addAnnotatedClass(Message.class)
                     .buildSessionFactory();
             System.out.println("[HIBERNATE] SessionFactory initialisée avec succès.");
         } catch (Exception e) {
-            System.err.println("[HIBERNATE] Erreur : " + e.getMessage());
-            throw new RuntimeException(e);
+            System.err.println("[HIBERNATE] Erreur lors de l'initialisation : " + e.getMessage());
+            throw new ExceptionInInitializerError(e);
         }
     }
 
     public static SessionFactory getSessionFactory() {
-        return sessionFactory;
+        return SESSION_FACTORY;
     }
 
     public static void shutdown() {
-        if (sessionFactory != null) sessionFactory.close();
+        if (SESSION_FACTORY != null && !SESSION_FACTORY.isClosed()) {
+            SESSION_FACTORY.close();
+            System.out.println("[HIBERNATE] SessionFactory fermée.");
+        }
     }
 }
