@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="g2.messagerieclient.controller.LoginController"
+      styleClass="login-container"
+      alignment="CENTER"
+      spacing="15"
+      prefWidth="400" prefHeight="500"
+      stylesheets="@style.css">
+
+    <Label text="💬 G2 Messagerie" styleClass="login-title"/>
+    <Label text="Application de messagerie instantanée" styleClass="login-subtitle"/>
+
+    <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" prefWidth="340">
+
+        <!-- ONGLET CONNEXION -->
+        <Tab text="Connexion">
+            <VBox spacing="12" style="-fx-padding: 20;">
+                <TextField fx:id="usernameField" promptText="Nom d'utilisateur"/>
+                <PasswordField fx:id="passwordField" promptText="Mot de passe"/>
+                <Button text="Se connecter" styleClass="btn-login"
+                        onAction="#handleLogin" maxWidth="Infinity"/>
+            </VBox>
+        </Tab>
+
+        <!-- ONGLET INSCRIPTION -->
+        <Tab text="Inscription">
+            <VBox spacing="12" style="-fx-padding: 20;">
+                <TextField fx:id="usernameField" promptText="Nom d'utilisateur"/>
+                <PasswordField fx:id="passwordField" promptText="Mot de passe"/>
+                <ComboBox fx:id="roleComboBox" maxWidth="Infinity"/>
+                <Button text="S'inscrire" styleClass="btn-register"
+                        onAction="#handleRegister" maxWidth="Infinity"/>
+            </VBox>
+        </Tab>
+
+    </TabPane>
+
+    <Label fx:id="messageLabel" text="" wrapText="true" maxWidth="340"/>
+
+</VBox>
