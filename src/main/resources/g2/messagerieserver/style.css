@@ -1,0 +1,247 @@
+* {
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== FOND GENERAL ===== */
+.root {
+    -fx-background-color: #F0FFF4;
+}
+
+/* ===== LOGIN PAGE ===== */
+.login-container {
+    -fx-background-color: linear-gradient(to bottom right, #064E3B, #065F46);
+    -fx-background-radius: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 20, 0, 0, 8);
+}
+
+.login-title {
+    -fx-text-fill: #D4AF37;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 10, 0, 0, 2);
+}
+
+.login-subtitle {
+    -fx-text-fill: #A7F3D0;
+    -fx-font-size: 13px;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: #A7F3D0;
+    -fx-border-color: #34D399;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #D4AF37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.4), 8, 0, 0, 0);
+}
+
+.btn-login {
+    -fx-background-color: linear-gradient(to right, #D4AF37, #F59E0B);
+    -fx-text-fill: #064E3B;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-padding: 10 30 10 30;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.5), 10, 0, 0, 3);
+}
+
+.btn-login:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.btn-register {
+    -fx-background-color: transparent;
+    -fx-text-fill: #34D399;
+    -fx-font-size: 13px;
+    -fx-border-color: #34D399;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 25 8 25;
+    -fx-cursor: hand;
+}
+
+.btn-register:hover {
+    -fx-background-color: rgba(52,211,153,0.1);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+/* ===== CHAT PAGE ===== */
+.chat-root {
+    -fx-background-color: #F0FFF4;
+}
+
+/* Barre du haut */
+.top-bar {
+    -fx-background-color: linear-gradient(to right, #064E3B, #065F46);
+    -fx-padding: 12 20 12 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 3);
+}
+
+.app-title {
+    -fx-text-fill: #D4AF37;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.user-label {
+    -fx-text-fill: #A7F3D0;
+    -fx-font-size: 13px;
+}
+
+/* Sidebar */
+.sidebar {
+    -fx-background-color: #022C22;
+    -fx-min-width: 220px;
+    -fx-max-width: 220px;
+}
+
+.sidebar-title {
+    -fx-text-fill: #D4AF37;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 15 10 10 15;
+}
+
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #A7F3D0;
+    -fx-font-size: 13px;
+    -fx-padding: 10 15 10 15;
+}
+
+.list-cell:hover {
+    -fx-background-color: rgba(52,211,153,0.15);
+    -fx-background-radius: 8;
+}
+
+.list-cell:selected {
+    -fx-background-color: rgba(212,175,55,0.2);
+    -fx-text-fill: #D4AF37;
+    -fx-background-radius: 8;
+    -fx-font-weight: bold;
+}
+
+/* Zone messages */
+.messages-area {
+    -fx-background-color: #F0FFF4;
+}
+
+.conversation-header {
+    -fx-background-color: white;
+    -fx-padding: 12 20 12 20;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 5, 0, 0, 2);
+}
+
+.selected-user-label {
+    -fx-text-fill: #064E3B;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.scroll-pane {
+    -fx-background-color: #F0FFF4;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #F0FFF4;
+}
+
+/* Scrollbar fine verte */
+.scroll-bar:vertical {
+    -fx-pref-width: 6px;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #34D399;
+    -fx-background-radius: 3;
+}
+
+/* Zone saisie */
+.input-area {
+    -fx-background-color: white;
+    -fx-padding: 12 15 12 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 5, 0, 0, -2);
+}
+
+.message-field {
+    -fx-background-color: #F0FFF4;
+    -fx-border-color: #34D399;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 10 15 10 15;
+    -fx-font-size: 13px;
+    -fx-text-fill: #064E3B;
+}
+
+.message-field:focused {
+    -fx-border-color: #D4AF37;
+    -fx-effect: dropshadow(gaussian, rgba(212,175,55,0.3), 6, 0, 0, 0);
+}
+
+.btn-send {
+    -fx-background-color: linear-gradient(to right, #064E3B, #065F46);
+    -fx-text-fill: #D4AF37;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 20;
+    -fx-padding: 10 25 10 25;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(6,78,59,0.4), 8, 0, 0, 3);
+}
+
+.btn-send:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.btn-refresh {
+    -fx-background-color: rgba(52,211,153,0.15);
+    -fx-text-fill: #34D399;
+    -fx-background-radius: 8;
+    -fx-border-color: #34D399;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 5 10 5 10;
+}
+
+.btn-logout {
+    -fx-background-color: rgba(212,175,55,0.15);
+    -fx-text-fill: #D4AF37;
+    -fx-background-radius: 8;
+    -fx-border-color: #D4AF37;
+    -fx-border-radius: 8;
+    -fx-cursor: hand;
+    -fx-padding: 5 15 5 15;
+}
+
+.btn-logout:hover {
+    -fx-background-color: rgba(212,175,55,0.3);
+}
+
+/* Tab pane login */
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-text-fill: #A7F3D0;
+}
+
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: rgba(212,175,55,0.3);
+    -fx-text-fill: #D4AF37;
+}
