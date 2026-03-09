@@ -49,6 +49,9 @@ public class ServerConnection {
         out.flush();
         out.reset();
     }
+    public void setListener(PacketListener listener) {
+        this.listener = listener;
+    }
 
     public void disconnect() {
         try {
