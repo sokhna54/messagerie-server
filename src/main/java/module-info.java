@@ -5,4 +5,6 @@ module g2.messagerieserver {
     requires java.sql;
     requires jbcrypt;
     requires static lombok;
+    requires javafx.graphics;
+    requires javafx.fxml;
 }
