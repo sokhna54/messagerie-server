@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="g2.messagerieclient.controller.ChatController"
+            styleClass="chat-root"
+            prefWidth="800" prefHeight="600"
+            stylesheets="@style.css">
+
+    <!-- BARRE DU HAUT -->
+    <top>
+        <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="20">
+            <Label text="💬 G2 Messagerie" styleClass="app-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="currentUserLabel" styleClass="user-label"/>
+            <Button text="Déconnexion" styleClass="btn-logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+
+    <!-- SIDEBAR GAUCHE -->
+    <left>
+        <VBox styleClass="sidebar">
+            <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
+                <Label text="👥 Membres" styleClass="sidebar-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="↺" styleClass="btn-refresh" onAction="#handleRefresh"/>
+            </HBox>
+            <ListView fx:id="userListView" styleClass="list-view" VBox.vgrow="ALWAYS"/>
+        </VBox>
+    </left>
+
+    <!-- ZONE CENTRALE MESSAGES -->
+    <center>
+        <VBox>
+            <!-- Header conversation -->
+            <HBox styleClass="conversation-header" alignment="CENTER_LEFT">
+                <Label fx:id="selectedUserLabel" text="Sélectionnez un membre"
+                       styleClass="selected-user-label"/>
+            </HBox>
+
+            <!-- Messages -->
+            <ScrollPane fx:id="scrollPane" styleClass="scroll-pane"
+                        fitToWidth="true" VBox.vgrow="ALWAYS">
+                <VBox fx:id="messagesBox" spacing="5" style="-fx-padding: 15;"/>
+            </ScrollPane>
+
+            <!-- Zone saisie -->
+            <HBox styleClass="input-area" spacing="10" alignment="CENTER">
+                <TextField fx:id="messageField" styleClass="message-field"
+                           promptText="Écrire un message..."
+                           HBox.hgrow="ALWAYS"
+                           onAction="#handleSend"/>
+                <Button text="Envoyer ➤" styleClass="btn-send" onAction="#handleSend"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>
