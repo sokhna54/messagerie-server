@@ -5,6 +5,7 @@ import lombok.*;
 import org.mindrot.jbcrypt.BCrypt;
 import java.time.LocalDateTime;
 
+// Modèle d'un utilisateur
 @Entity
 @Table(name = "users")
 @Getter
@@ -12,7 +13,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class User {
 
+    // Rôles disponibles
     public enum Role { ORGANISATEUR, MEMBRE, BENEVOLE }
+    // Statut : connecté ou non
     public enum Status { ONLINE, OFFLINE }
 
     @Id
@@ -23,6 +26,7 @@ public class User {
     @Column(unique = true, nullable = false, length = 50)
     private String username;
 
+    // Mot de passe hashé avec BCrypt
     @Column(nullable = false)
     private String password;
 
@@ -37,6 +41,7 @@ public class User {
     @Column(name = "dateCreation")
     private LocalDateTime dateCreation = LocalDateTime.now();
 
+    // Constructeur : crée un nouvel utilisateur avec mot de passe hashé
     public User(String username, String rawPassword, Role role) {
         this.username = username;
         this.password = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
@@ -45,6 +50,7 @@ public class User {
         this.dateCreation = LocalDateTime.now();
     }
 
+    // Vérifie si le mot de passe est correct
     public boolean checkPassword(String rawPassword) {
         return BCrypt.checkpw(rawPassword, this.password);
     }

@@ -52,7 +52,7 @@ public class ClientHandler implements Runnable {
             disconnect();
         }
     }
-
+// Traite les différents types de paquets reçus du client et appelle les méthodes correspondantes pour chaque action (login, register, send message, etc.)
     private void handlePacket(Packet packet) throws IOException {
         log("Reçu : " + packet);
         switch (packet.getType()) {
@@ -66,10 +66,11 @@ public class ClientHandler implements Runnable {
             default -> send(Packet.error("Type de paquet non reconnu."));
         }
     }
-
+//gere la connexion d un utilisateur, vérifie que le nom n est pas déjà connecté, tente de se connecter en base, et notifie tous les autres utilisateurs du changement de statut
     private void handleLogin(Packet packet) throws IOException {
+
         if (server.isConnected(packet.getFromUsername())) {
-            send(Packet.error("Cet utilisateur est déjà connecté. (RG3)"));
+            send(Packet.error("Cet utilisateur est déjà connecté. "));
             return;
         }
         try {
@@ -93,7 +94,7 @@ public class ClientHandler implements Runnable {
             send(fail);
         }
     }
-
+//gere l inscription d un nouvel utilisateur
     private void handleRegister(Packet packet) throws IOException {
         try {
             User user = userService.register(
@@ -111,13 +112,14 @@ public class ClientHandler implements Runnable {
             send(fail);
         }
     }
+    //gere la deconnexion d un utilisateur,notifie tous les autres utilisateurs du changement de statut, et ferme la connexion
 
     private void handleLogout() throws IOException {
         log("Déconnexion demandée par " + username);
         send(new Packet(Packet.Type.LOGOUT_OK));
         disconnect();
     }
-
+//gere l envoi des messages entre deux utilisateurs, vérifie que les deux existent, crée le message en base, et notifie le destinataire si il est en ligne
     private void handleSendMessage(Packet packet) throws IOException {
         if (username == null) { send(Packet.error("Non authentifié.")); return; }
 
@@ -145,7 +147,7 @@ public class ClientHandler implements Runnable {
             send(Packet.error(e.getMessage()));
         }
     }
-
+//retourne l'historique des messages entre deux utilisateurs !
     private void handleGetHistory(Packet packet) throws IOException {
         if (username == null) { send(Packet.error("Non authentifié.")); return; }
 
@@ -165,6 +167,7 @@ public class ClientHandler implements Runnable {
         send(response);
     }
 
+//retourne la liste des utilisateurs connectés, avec leur statut et rôle. Les organisateurs voient tous les utilisateurs, les autres ne voient que les utilisateurs en ligne (RG13).
     private void handleGetUsers(Packet packet) throws IOException {
         if (username == null) { send(Packet.error("Non authentifié.")); return; }
 
@@ -186,7 +189,7 @@ public class ClientHandler implements Runnable {
         response.setData(data);
         send(response);
     }
-
+// Marque tous les messages d'une conversation comme lus lorsque le client le demande (RG7).
     private void handleMarkRead(Packet packet) {
         if (username == null) return;
         List<Message> conversation = messageService.getConversation(packet.getToUsername(), username);
@@ -217,7 +220,7 @@ public class ClientHandler implements Runnable {
         if (!pending.isEmpty())
             log(pending.size() + " message(s) en attente livré(s) à " + username);
     }
-
+// Notifie tous les autres utilisateurs du changement de statut d'un utilisateur (ONLINE/OFFLINE) via un paquet de type STATUS_UPDATE.
     private void broadcastStatusUpdate(String user, String status) {
         Packet update = new Packet(Packet.Type.STATUS_UPDATE);
         update.setFromUsername(user);

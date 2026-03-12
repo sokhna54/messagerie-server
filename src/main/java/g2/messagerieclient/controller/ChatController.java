@@ -28,7 +28,7 @@ public class ChatController {
         this.currentUsername = username;
         this.currentRole = role;
         this.connection = connection;
-        currentUserLabel.setText("🟢 " + username + " (" + role + ")");
+        currentUserLabel.setText( username + " (" + role + ")");
         connection.setListener(this::handlePacket);
         loadUsers();
     }
@@ -46,13 +46,14 @@ public class ChatController {
     }
 
     @FXML
+
     public void handleSend() {
         String content = messageField.getText().trim();
         if (content.isEmpty() || selectedUser == null) return;
 
         try {
             connection.send(Packet.sendMessage(currentUsername, selectedUser, content));
-            addMessage(content, true);
+            addMessage(content, true, "ENVOYE"); // ← ajout ENVOYE
             messageField.clear();
         } catch (Exception e) {
             System.err.println("Erreur envoi message : " + e.getMessage());
@@ -92,7 +93,7 @@ public class ChatController {
             String username = u[0];
             String status = u[2];
             if (!username.equals(currentUsername)) {
-                String display = (status.equals("ONLINE") ? "🟢 " : "⚫ ") + username;
+                String display = username + " | " + (status.equals("ONLINE") ? " En ligne" : "⚫ Hors ligne");
                 userListView.getItems().add(display);
             }
         }
@@ -100,7 +101,7 @@ public class ChatController {
         userListView.setOnMouseClicked(e -> {
             String selected = userListView.getSelectionModel().getSelectedItem();
             if (selected != null) {
-                String username = selected.trim().replaceAll("^[^a-zA-Z0-9]+", "");
+                String username = selected.split(" \\| ")[0].trim();
                 openConversation(username);
             }
         });
@@ -115,7 +116,8 @@ public class ChatController {
         for (String[] msg : history) {
             String from = msg[0];
             String content = msg[2];
-            addMessage(content, from.equals(currentUsername));
+            String statut = msg[4]; // ← récupère le statut
+            addMessage(content, from.equals(currentUsername), statut); // ← ajout statut
         }
     }
 
@@ -123,24 +125,26 @@ public class ChatController {
         String from = packet.getFromUsername();
         if (from.equals(currentUsername)) return;
 
-        System.out.println("MESSAGE_RECEIVED from=" + from +
-                " currentUser=" + currentUsername +
-                " selectedUser=" + selectedUser);
-
         if (selectedUser != null && from.equals(selectedUser)) {
-            addMessage(packet.getContent(), false);
+            addMessage(packet.getContent(), false, null); // ← ajout null
         }
     }
 
-    private void addMessage(String content, boolean isMine) {
+    private void addMessage(String content, boolean isMine, String statut) {
         HBox container = new HBox();
         container.setPadding(new Insets(5, 10, 5, 10));
         container.setAlignment(isMine ? Pos.CENTER_RIGHT : Pos.CENTER_LEFT);
 
-        Text text = new Text(content);
-        text.setWrappingWidth(300);
+        String tick = "";
+        if (isMine) {
+            if (statut != null && (statut.equals("RECU") || statut.equals("LU"))) {
+                tick = " ✓✓"; // destinataire a reçu
+            } else {
+                tick = " ✓";  // envoyé mais pas encore reçu
+            }
+        }
 
-        Label bubble = new Label(content);
+        Label bubble = new Label(content + tick);
         bubble.setWrapText(true);
         bubble.setMaxWidth(300);
         bubble.setPadding(new Insets(8, 12, 8, 12));
@@ -150,10 +154,8 @@ public class ChatController {
 
         container.getChildren().add(bubble);
         messagesBox.getChildren().add(container);
-
         scrollPane.setVvalue(1.0);
     }
-
     @FXML
     public void handleLogout() {
         try {

@@ -6,6 +6,11 @@
 .root {
     -fx-background-color: #F0FFF4;
 }
+#messageLabel {
+    -fx-text-fill: white;
+    -fx-font-size: 13px;
+    -fx-padding: 5;
+}
 
 /* ===== LOGIN PAGE ===== */
 .login-container {

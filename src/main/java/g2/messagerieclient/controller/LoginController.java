@@ -34,6 +34,7 @@ public class LoginController {
 
     @FXML
     public void handleLogin() {
+
         String username = usernameField.getText().trim();
         String password = passwordField.getText().trim();
 
@@ -72,24 +73,29 @@ public class LoginController {
     }
 
     private void handlePacket(Packet packet) {
-        switch (packet.getType()) {
-            case LOGIN_OK -> openChat(packet.getFromUsername(), packet.getRole());
-            case LOGIN_FAIL -> {
-                messageLabel.setText(packet.getContent());
-                messageLabel.setStyle("-fx-text-fill: red;");
+        javafx.application.Platform.runLater(() -> {
+            switch (packet.getType()) {
+                case LOGIN_OK -> openChat(packet.getFromUsername(), packet.getRole());
+                case LOGIN_FAIL -> {
+                    messageLabel.setText( packet.getContent());
+                    messageLabel.setStyle("-fx-text-fill: red; -fx-font-size: 13px; -fx-font-weight: bold;");
+                }
+                case REGISTER_OK -> {
+                    messageLabel.setText( packet.getContent());
+                    messageLabel.setStyle("-fx-text-fill: #34D399; -fx-font-size: 13px;");
+                }
+                case REGISTER_FAIL -> {
+                    messageLabel.setText( packet.getContent());
+                    messageLabel.setStyle("-fx-text-fill: red; -fx-font-size: 13px;");
+                }
+                case ERROR -> {
+                    messageLabel.setText(packet.getContent());
+                    messageLabel.setStyle("-fx-text-fill: red; -fx-font-size: 13px; -fx-font-weight: bold;");
+                }
+                default -> {}
             }
-            case REGISTER_OK -> {
-                messageLabel.setText(packet.getContent());
-                messageLabel.setStyle("-fx-text-fill: green;");
-            }
-            case REGISTER_FAIL -> {
-                messageLabel.setText(packet.getContent());
-                messageLabel.setStyle("-fx-text-fill: red;");
-            }
-            default -> {}
-        }
+        });
     }
-
     private void openChat(String username, String role) {
         try {
             FXMLLoader loader = new FXMLLoader(

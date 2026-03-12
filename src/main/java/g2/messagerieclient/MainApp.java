@@ -11,7 +11,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/g2/messagerieclient/login.fxml"));
         Scene scene = new Scene(loader.load());
-        stage.setTitle("G2 Messagerie");
+        stage.setTitle("SoZeyChat");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
